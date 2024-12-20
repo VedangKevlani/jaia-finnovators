@@ -1,15 +1,15 @@
 /* General styles */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
   font-family: 'Poppins', Arial, sans-serif;
   display: flex;
+  flex-direction: column;
   height: 100vh;
   background-color: #ffffff;
+  margin: 0; /* Remove default margin to avoid unwanted scrolling */
 }
 
 /* Sidebar styles */
@@ -24,7 +24,235 @@ body {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  gap: 20px; 
+  gap: 20px;
+  z-index: 5; /* Ensure sidebar is behind the menu */
+}
+
+/* Menu styles */
+.menu {
+  display: flex;
+  align-items: center;
+  background-color: rgba(140, 140, 140, 0.1);
+  padding: 10px 30px; /* Increase padding to allow more space */
+  position: fixed;
+  top: 20px;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  margin: 0 auto;
+  left: 60%;
+  transform: translateX(-50%);
+  width: auto; /* Set width to auto so it fits the content */
+  min-width: 300px; /* Optional: set a minimum width for readability */
+}
+
+/* Menu list styles */
+.menu ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* Adjust spacing as needed */
+  padding: 0;
+  margin: 0;
+}
+
+/* Menu list links (li a) */
+.menu a {
+  color: #000000;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+/* Menu logo styling */
+.menu-logo {
+  font-size: 36px;
+  font-weight: 750;
+  background: linear-gradient(to bottom, black, #00BF63);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+
+.menu a:hover {
+  background-color: black;
+  color: white;
+}
+
+/* Main Content Area */
+.content {
+  margin-left: 300px;  /* Space for sidebar */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+  overflow-y: auto;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  position: relative; /* Positioning context for chat container */
+}
+
+/* Chat container fixed at the bottom right */
+#chat-container {
+  position: fixed;           /* Fixed to the viewport */
+  bottom: 80px;              /* Distance from the bottom */
+  right: 20px;               /* Distance from the right */
+  display: flex;
+  flex-direction: column;    /* Standard column layout for messages */
+  align-items: flex-end;     /* Align messages to the right */
+  height: 60vh;              /* Container height */
+  max-width: 350px;          /* Limit the width of the container */
+  overflow-y: auto;          /* Allow vertical scrolling */
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;       /* Optional: rounded corners for the chat container */
+}
+
+/* Individual message styling */
+.chat-message {
+  margin: 8px 0;             /* Add vertical spacing between messages */
+  padding: 12px;             /* Add padding to each message */
+  color: #fff;               /* White text for messages */
+  border-radius: 8px;        /* Rounded corners for the message bubble */
+  max-width: 80%;            /* Prevent messages from stretching too far */
+  word-wrap: break-word;     /* Break long words */
+  display: inline-block;     /* Ensure messages are treated as blocks */
+  word-break: break-word;    /* Ensure long words break and don't overflow */
+}
+
+.input-container {
+  position: fixed;
+  bottom: 50px;
+  left: 340px;
+  right: 40px;
+  background-color: rgba(140, 140, 140, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+.input-bar {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: rgba(140, 140, 140, 0.1);
+  font-size: 16px;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+/* Send button styling */
+.send-btn {
+  padding: 12px 20px;         /* Adjust padding for proportionate size */
+  border-radius: 50%;         /* Circular button */
+  background-color: #0bce15;  /* Green color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;          /* Space between input and button */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;            /* Larger font size for the button */
+}
+
+.send-btn:hover {
+  background-color: #056e02;  /* Darker green on hover */
+}
+
+.chat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.chat-item span {
+  flex: 1;
+}
+
+
+/* Styling for the delete button */
+.chat-item .delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.chat-item .delete-btn:hover {
+  background-color: darkred;
+}
+
+
+/* Finny intro styles */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1; /* Allow it to expand and occupy available space */
+  padding: 20px;
+  width: 100%; /* Ensure the intro doesn't extend into the sidebar */
+}
+
+.intro img {
+  width: 200px;
+  margin-bottom: 20px;
+  object-fit: contain;
+}
+
+.intro h1 {
+  font-family: 'Poppins', Arial, sans-serif;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.intro p {
+  font-size: 16px;
+  font-family: 'Poppins', Arial, sans-serif;
+  color: #767676;
+  line-height: 1.5;
+}
+
+.gradient-text {
+  background: linear-gradient(to bottom, black, #00BF63);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Begin New Chat button */
+.new-chat-btn {
+  margin-top: 5px; 
+  background-color: #242723; 
+  color: white;
+  border: none;
+  padding: 10px 20px; 
+  border-radius: 10px; 
+  font-size: 16px;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.new-chat-btn:hover {
+  background-color: #555d52; 
 }
 
 /* Logo container */
@@ -48,55 +276,6 @@ body {
   cursor: pointer;
 }
 
-/* Begin New Chat button */
-.new-chat-btn {
-  margin-top: 5px; 
-  background-color: #242723; 
-  color: white;
-  border: none;
-  padding: 10px 20px; 
-  border-radius: 10px; 
-  font-size: 16px;
-  font-family: 'Poppins', Arial, sans-serif;
-  font-weight: bold;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s ease;
-}
-
-
-.new-chat-btn:hover {
-  background-color: #555d52; 
-}
-
-
-/* Content area styles */
-.content {
-  margin-left: 300px; 
-  flex: 1;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  min-height: 100vh;
-  overflow-y: auto;
-}
-
-
-/* Chat container */
-.chat-container {
-  background-color: rgba(30, 30, 30, 0.64); 
-  width: calc(100% - 10px); 
-  max-width: 260px; 
-  height: calc(100vh - 300px); 
-  margin-top: 20px; 
-  padding: 20px;
-  overflow-y: auto; 
-  display: flex;
-  flex-direction: column;
-  gap: 15px; 
-}
-
 /* Search Bar Container with Icon */
 .search-container {
   position: relative; 
@@ -104,7 +283,7 @@ body {
 }
 
 .search-bar {
-  width: calc(100% - 30px); 
+  width: calc(100% - 10px); 
   padding: 10px 40px 10px 40px; 
   border: none;
   border-radius: 5px; 
@@ -216,120 +395,23 @@ body {
   height: auto;
 }
 
-
-/* Intro styles */
-.intro {
+/* Sidebar and Menu Container */
+.sidebar-menu-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: calc(100vh - 60px); 
-  margin-top: -60px;
+  flex-direction: row; /* Align the sidebar and menu horizontally */
 }
 
-.intro img {
-  width: 200px;
-  margin-bottom: 20px;
+/* Remove scrollbar when content is empty */
+.content:empty {
+  overflow: hidden; /* Prevent scrollbar from appearing */
 }
 
-.intro h1 {
-  font-family: 'Poppins', Arial, sans-serif;
-  font-size: 36px;
-  margin-bottom: 10px;
-}
-
-.intro p {
-  font-size: 16px;
-  font-family: 'Poppins', Arial, sans-serif;
-  color: #767676;
-  line-height: 1.5; 
-}
-
-/* Menu styles */
-.menu {
-  display: flex;
-  align-items: center;
-  background-color: rgba(140, 140, 140, 0.1); 
-  padding: 10px 20px;
-  position: fixed; 
-  top: 20px; 
-  z-index: 10; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-  margin: 0 auto; 
-  left: 60%;
-  transform: translateX(-50%); 
-  width: fit-content; 
-}
-
-.menu-logo {
-  font-size: 36px;
-  font-weight: 750;
-  background: linear-gradient(to bottom, black, #00BF63);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-right: 30px;
-  white-space: nowrap;
-}
-/* Menu list styles */
-.menu ul {
-  list-style-type: none;
-  display: flex;
-  justify-content: center;
-  gap: 40px; 
-  padding: 0;
-  margin: 0;
-}
-
-
-.menu a {
-  color: #000000;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 14px;
-  padding: 10px 20px;
-  border-radius: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.menu a:hover {
-  background-color: black;
-  color: white;
-}
-
-
-/* Input bar styles */
-.input-container {
-  position: fixed;
-  bottom: 50px;
-  left: 340px; 
-  right: 40px;
-  background-color: rgba(140, 140, 140, 0.1); 
-  display: flex;
-  align-items: center;
-  padding: 10px 20px;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 20px;
-}
-
-
-
-.input-bar {
-  flex: 1;
-  padding: 10px;
-  border-radius: 20px;
-  border: rgba(140, 140, 140, 0.1); 
-  font-size: 16px;
-  font-family: 'Poppins', Arial, sans-serif;
-}
-
-.send-btn {
+.undo-btn {
   background-color: #00BF63;
   color: white;
-  font-size: 20px;
+  font-size: 10px;
   border: none;
-  border-radius: 50%;
+  border-radius: 30%;
   width: 40px;
   height: 40px;
   display: flex;
@@ -339,13 +421,14 @@ body {
   cursor: pointer;
 }
 
-.send-btn:hover {
+.undo-btn:hover {
   background-color: #056e02;
 }
 
-.logo-image {
-  width: 50px;
-  height: auto; 
+.typing-animation {
+  display: none;
+  margin-top: 10px;
+  font-style: italic;
 }
 
 .finny-image {
@@ -353,92 +436,20 @@ body {
   height: auto; 
 }
 
-.gradient-text {
-  background: linear-gradient(to bottom, black, #00BF63);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
+/* Fixed menu icon styles */
 .menu-icon {
-  position: absolute; 
-  top: 20px; 
-  right: 20px; 
-  width: 40px; 
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
   height: auto;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
-.glow {
-  position: absolute; 
-  border-radius: 50%; 
-  background-color: rgba(0, 191, 99, 0.4); 
-  box-shadow: 0 0 50px 30px rgba(0, 191, 99, 0.8);
-  pointer-events: none;
-  z-index: 5; 
-}
+/* General styling for chat messages */
+/* Styling for the "Begin New Chat" button */
 
-/* Base glow class */
-.glow {
-  position: absolute;
-  border-radius: 50%;
-  background-color: rgba(0, 191, 99, 0.4);
-  box-shadow: 0 0 50px 30px rgba(0, 191, 99, 0.8); 
-  pointer-events: none; 
-  z-index: 5; 
-}
-
-/* Glowing areas */
-.glow {
-  position: absolute;
-  box-shadow: 0 0 100px 100px rgba(0, 191, 99, 0.2); 
-  pointer-events: none;
-  z-index: 5; 
-}
-
-/* Glow area 1: Centered */
-.glow-area-1 {
-  top: 40%; 
-  left: 60%; 
-  transform: translate(-50%, -50%); 
-  width: 0;
-  height: 0;
-}
-
-/* Glow area 2: Top-right corner */
-.glow-area-2 {
-  top: 20px; 
-  right: 20px; 
-  width: 0;
-  height: 0;
-}
-
-/* Glow area 3: Centered far left */
-.glow-area-3 {
-  top: 50%; 
-  left: 50px; 
-  transform: translateY(-50%); 
-  width: 0;
-  height: 0;
-}
-
-/* Glow area 4: Near input bar */
-.glow-area-4 {
-  bottom: 70px; 
-  left: 340px;
-  width: 0;
-  height: 0;
-}
-
-
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 50px 30px rgba(0, 191, 99, 0.8);
-  }
-  50% {
-    box-shadow: 0 0 70px 40px rgba(0, 191, 99, 1);
-  }
-}
-
-.pulsing-glow {
-  animation: pulse 2s infinite; 
+/* Hide the intro section when a message is entered */
+.intro {
+  transition: opacity 0.5s ease-out;
 }
