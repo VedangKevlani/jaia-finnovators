@@ -9,6 +9,7 @@ body {
   font-family: 'Poppins', Arial, sans-serif;
   display: flex;
   height: 100vh;
+  overflow: hidden; /* Disable scrolling */
   background-color: #ffffff;
 }
 
@@ -25,6 +26,49 @@ body {
   flex-direction: column;
   padding: 20px;
   gap: 20px; 
+}
+
+/* Sidebar toggle image */
+.sidebar-toggle {
+  width: 30px; /* Adjust size as needed */
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Sidebar hidden state */
+.sidebar.hidden {
+  transform: translateX(-300px); /* Hide sidebar */
+  transition: transform 0.3s ease;
+}
+
+
+.sidebar.hidden + .content {
+  margin-left: 0; /* Adjust content width when sidebar is hidden */
+}
+
+/* Show Sidebar Button */
+.sidebar-show {
+  position: absolute;
+  top: 20px; /* Align with the logo */
+  left: 0;
+  width: 50px; /* Adjust size to match the toggle button */
+  height: auto;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 11; /* Above content but below sidebar */
+}
+
+/* Hidden state for Show Sidebar Button */
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Visible state for Show Sidebar Button */
+.sidebar-show.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Logo container */
@@ -80,6 +124,7 @@ body {
   justify-content: flex-start;
   min-height: 100vh;
   overflow-y: auto;
+  transition: margin-left 0.3s ease;
 }
 
 
@@ -224,9 +269,14 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  height: calc(100vh - 60px); 
-  margin-top: -60px;
+  position: absolute; /* Allows positioning relative to the viewport */
+  top: 45%; /* Center vertically */
+  left: 60%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust positioning for centering */
+  width: 100%; /* Optional: ensures content stays responsive */
+  height: auto; /* Avoid forcing height calculation */
 }
+
 
 .intro img {
   width: 200px;
@@ -298,14 +348,21 @@ body {
   color: white;
 }
 
+.menu a.active {
+  background-color: black; /* Highlight color */
+  color: white; /* Contrasting text color */
+  border-radius: 20px; /* Match existing rounded style */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
 
 /* Input bar styles */
 .input-container {
   position: fixed;
-  bottom: 50px;
-  left: 340px; 
-  right: 40px;
-  background-color: rgba(140, 140, 140, 0.1); 
+  bottom: 60px;
+  left: 365px; /* Increased to shave off 15px */
+  right: 65px; /* Increased to shave off 15px */
+  background-color: #242723; /* Match the grey theme */
   display: flex;
   align-items: center;
   padding: 10px 20px;
@@ -313,15 +370,16 @@ body {
   border-radius: 20px;
 }
 
-
-
 .input-bar {
   flex: 1;
   padding: 10px;
-  border-radius: 20px;
-  border: rgba(140, 140, 140, 0.1); 
+  border-radius: 20%;
+  border: none; /* Remove the inner white border */
   font-size: 16px;
   font-family: 'Poppins', Arial, sans-serif;
+  color: white; /* White text for better contrast */
+  background-color: #242723; /* Match the container grey */
+  outline: none; /* Remove the outline when focused */
 }
 
 .send-btn {
@@ -342,6 +400,7 @@ body {
 .send-btn:hover {
   background-color: #056e02;
 }
+
 
 .logo-image {
   width: 50px;
@@ -442,3 +501,163 @@ body {
 .pulsing-glow {
   animation: pulse 2s infinite; 
 }
+
+
+/* Chat bubble styles */
+.chat-bubble {
+  max-width: 40%;
+  background-color: #f5f5f5;
+  color: #000;
+  font-size: 16px;
+  font-family: 'Poppins', Arial, sans-serif;
+  padding: 10px 15px;
+  border-radius: 20px;
+  margin: 30px 0;
+  word-wrap: break-word;
+  margin-left: auto; /* Align to the right */
+}
+
+/* Bot response container */
+.bot-response {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.bot-response img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.bot-response .response-text {
+  max-width: 70%;
+  font-size: 16px;
+  font-family: 'Poppins', Arial, sans-serif;
+  padding: 10px 15px;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #000;
+  word-wrap: break-word;
+}
+
+/* Styles for chat buttons in Recent Chats */
+/* Styles for chat buttons in Recent Chats */
+.folder.recent-chat {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: white;
+  background-color: #2A2A2A; /* Dark gray */
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 5px; /* Spacing between chat buttons */
+  cursor: pointer;
+  position: relative; /* For dropdown positioning */
+}
+
+.folder.recent-chat:hover {
+  background-color: #3A3A3A; /* Lighter gray */
+  transform: scale(1.02); /* Slight zoom effect */
+}
+
+/* Three-dots image */
+.chat-dots {
+  margin-left: auto;
+  width: 20px; /* Scale down */
+  height: auto;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.chat-dots:hover {
+  opacity: 0.8; /* Slight transparency on hover */
+}
+
+/* Options menu styles */
+.chat-options-list {
+  position: fixed; /* Position relative to the viewport */
+  background-color: #242723; /* Match sidebar theme */
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  display: none; /* Hidden by default */
+  padding: 10px 0;
+  z-index: 1000; /* Ensure it appears above other elements */
+  min-width: 200px; /* Ensure the menu has enough space */
+}
+
+.chat-options-list.active {
+  display: block; /* Show when active */
+}
+
+.chat-options-item {
+  padding: 8px 15px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chat-options-item:hover {
+  background-color: #555d52; /* Highlight on hover */
+}
+
+.chat-options-item.delete {
+  color: red;
+}
+
+.chat-options-item.delete:hover {
+  background-color: #aa2d2d; /* Red highlight for delete */
+}
+
+
+/* Icons */
+.chat-options-item i {
+  font-size: 16px;
+}
+
+
+.chat-messages {
+  flex: 1;
+  margin-top: 60px; /* Leave space below the menu */
+  margin-bottom: 120px; /* Leave space above the input bar */
+  margin-left: 70px; /* Add space on the left to shift it right */
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: calc(100vh - 180px); /* Set maximum height relative to viewport */
+}
+
+
+/* Customize scrollbar for the chat-messages container */
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+  margin-left: auto;
+  display: none;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: #cccccc; /* Soft gray */
+  border-radius: 10px;
+  display: none;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background-color: #f5f5f5; /* Light background for track */
+  display: none;
+}
+
+/* Three-dots image in recent chat buttons */
+.chat-dots {
+  margin-left: auto; /* Push it to the far right */
+  width: 20px; /* Scale down */
+  height: auto;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.chat-dots:hover {
+  opacity: 0.8; /* Slight transparency on hover */
+}
+

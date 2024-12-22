@@ -26,6 +26,49 @@
     padding: 20px;
     gap: 20px; 
   }
+
+/* Sidebar toggle image */
+.sidebar-toggle {
+  width: 30px; /* Adjust size as needed */
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Sidebar hidden state */
+.sidebar.hidden {
+  transform: translateX(-300px); /* Hide sidebar */
+  transition: transform 0.3s ease;
+}
+
+
+.sidebar.hidden + .content {
+  margin-left: 0; /* Adjust content width when sidebar is hidden */
+}
+
+/* Show Sidebar Button */
+.sidebar-show {
+  position: absolute;
+  top: 20px; /* Align with the logo */
+  left: 0;
+  width: 50px; /* Adjust size to match the toggle button */
+  height: auto;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 11; /* Above content but below sidebar */
+}
+
+/* Hidden state for Show Sidebar Button */
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Visible state for Show Sidebar Button */
+.sidebar-show.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
   
   /* Logo container */
   .logo-container {
@@ -48,25 +91,6 @@
     cursor: pointer;
   }
   
-  /* Begin New Chat button */
-  .new-chat-btn {
-    margin-top: 5px; 
-    background-color: #242723; 
-    color: white;
-    border: none;
-    padding: 10px 20px; 
-    border-radius: 10px; 
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-  }
-  
-  
-  .new-chat-btn:hover {
-    background-color: #555d52; 
-  }
   
   
   /* Content area styles */
@@ -79,111 +103,6 @@
     justify-content: flex-start;
     min-height: 100vh;
     overflow-y: auto;
-  }
-  
-  
-  /* Chat container */
-  .chat-container {
-    background-color: rgba(30, 30, 30, 0.64); 
-    width: calc(100% - 10px); 
-    max-width: 260px; 
-    height: calc(100vh - 300px); 
-    margin-top: 20px; 
-    padding: 20px;
-    overflow-y: auto; 
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
-  }
-  
-  /* Search Bar Container with Icon */
-  .search-container {
-    position: relative; 
-    width: 100%; 
-  }
-  
-  .search-bar {
-    width: calc(100% - 30px); 
-    padding: 10px 40px 10px 40px; 
-    border: none;
-    border-radius: 5px; 
-    font-size: 16px;
-    font-family: 'Poppins', Arial, sans-serif;
-    color: #ffffff; 
-    background-color: #242723; 
-    outline: none;
-  }
-  
-  /* Search Icon */
-  .search-icon {
-    position: absolute; 
-    top: 50%; 
-    left: 10px; 
-    transform: translateY(-50%); 
-    width: 20px; 
-    height: auto; 
-    pointer-events: none; 
-  }
-  
-  
-  /* Year text */
-  .year-text {
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  /* Folder for December 2024 */
-  .folder {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: white;
-    background-color: #2A2A2A; 
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .folder:hover {
-    background-color: #3A3A3A; 
-  }
-  
-  .folder i {
-    margin-right: 10px; 
-  }
-  
-  
-  /* Recent Chats Text */
-  .recent-chats {
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 15px; 
-    margin-bottom: 10px; 
-  }
-  
-  /* Recent Chat Button */
-  .chat-button {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: white;
-    background-color: #2A2A2A;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .chat-button:hover {
-    background-color: #3A3A3A; 
-  }
-  
-  .chat-button i {
-    margin-right: 10px; 
   }
   
   /* Profile Button */
@@ -491,7 +410,7 @@
   
   /* Button styles */
   .action-button {
-    background: linear-gradient(90deg, #202020, #ffffff); 
+    background: linear-gradient(90deg, #000000, #00BF63); 
     color: white; 
     font-size: 14px; 
     font-family: 'Poppins', Arial, sans-serif;
@@ -504,7 +423,74 @@
   
   /* Hover effect */
   .action-button:hover {
-    background: linear-gradient(90deg, #ffffff, #202020); 
+    background: linear-gradient(90deg, #00BF63, #000000);
     transform: scale(1.05); 
   }
   
+  /* Piggy Modal Styling */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+#confirm-piggy-btn {
+  background-color: #00bf63;
+  color: #fff;
+}
+
+#cancel-piggy-btn {
+  background-color: #ccc;
+  color: #000;
+}
