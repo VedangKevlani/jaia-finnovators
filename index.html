@@ -6,11 +6,20 @@
     <title>Finnovators AI</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link href="styles/stylesheet.css" rel="stylesheet">
-    <script src="/javascript/finscripts.js" defer></script>
+    
+    <!-- Firebase SDKs -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"></script>
+
+    <!-- Firebase configuration script -->
+    <script type="module" src="javascript/firebaseconf.js"></script>
+
+    <!-- Main logic script -->
+    <script type="module" src="javascript/finscripts.js" defer></script>
 </head>
 <body>
     <div class="container">
-        <!-- Left Section -->
         <div class="left-section">
             <h1 class="gradient-title">Finny.</h1>
             <p class="typewriter">
@@ -19,16 +28,17 @@
             <div class="green-circle"></div>
         </div>
 
-        <!-- Right Section -->
-        <div class="right-section">
-            <img src="assets/finny-get-started.png" alt="Finnovators Logo" class="logo-image">
-            <button class="get-started-btn" onclick="window.location.href='mainpage.html'">Get Started</button>
-            <div class="footer">
-                <img src="assets/finnovators-logo.png" alt="Finnovators Logo">
-                <div>
-                    <a href="terms.html">Terms of Use</a> |
-                    <a href="privacy.html">Privacy Policy</a>
-                </div>
+        <div class="right-section" id="auth-container">
+            <img class="logo-image" src="assets/finny-get-started.png" alt="Finnovators Logo">
+            <h3>Welcome to Finny</h3>
+            <button id="login-btn" class="get-started-btn login-btn">Login</button>
+            <button id="signup-btn" class="get-started-btn create-account-btn">Create Account</button>
+        </div>
+
+        <div class="footer">
+            <img src="assets/finnovators-logo.png" alt="Finnovators Logo">
+            <div>
+                <a href="terms.html">Terms of Use</a> | <a href="privacy.html">Privacy Policy</a>
             </div>
         </div>
     </div>

@@ -1,524 +1,489 @@
 /* General styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Poppins', Arial, sans-serif;
-    display: flex;
-    height: 100vh;
-    background-color: #ffffff;
-  }
-  
-  /* Sidebar styles */
-  .sidebar {
-    width: 300px;
-    height: 100vh;
-    background-color: #111111;
-    color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    gap: 20px; 
-  }
-  
-  /* Logo container */
-  .logo-container {
-    display: flex;
-    align-items: center; 
-    justify-content: space-between; 
-    margin-bottom: 10px; 
-  }
-  
-  /* Logo image */
-  .logo-image {
-    width: 50px;
-    height: auto;
-  }
-  
-  /* Three dots */
-  .more-dots {
-    font-size: 24px;
-    color: white;
-    cursor: pointer;
-  }
-  
-  /* Begin New Chat button */
-  .new-chat-btn {
-    margin-top: 5px; 
-    background-color: #242723; 
-    color: white;
-    border: none;
-    padding: 10px 20px; 
-    border-radius: 10px; 
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s ease;
-  }
-  
-  
-  .new-chat-btn:hover {
-    background-color: #555d52; 
-  }
-  
-  
-  /* Content area styles */
-  .content {
-    margin-left: 300px; 
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    min-height: 100vh;
-    overflow-y: auto;
-  }
-  
-  
-  /* Chat container */
-  .chat-container {
-    background-color: rgba(30, 30, 30, 0.64); 
-    width: calc(100% - 10px); 
-    max-width: 260px; 
-    height: calc(100vh - 300px); 
-    margin-top: 20px; 
-    padding: 20px;
-    overflow-y: auto; 
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
-  }
-  
-  /* Search Bar Container with Icon */
-  .search-container {
-    position: relative; 
-    width: 100%; 
-  }
-  
-  .search-bar {
-    width: calc(100% - 30px); 
-    padding: 10px 40px 10px 40px; 
-    border: none;
-    border-radius: 5px; 
-    font-size: 16px;
-    font-family: 'Poppins', Arial, sans-serif;
-    color: #ffffff; 
-    background-color: #242723; 
-    outline: none;
-  }
-  
-  /* Search Icon */
-  .search-icon {
-    position: absolute; 
-    top: 50%; 
-    left: 10px; 
-    transform: translateY(-50%); 
-    width: 20px; 
-    height: auto; 
-    pointer-events: none; 
-  }
-  
-  
-  /* Year text */
-  .year-text {
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  /* Folder for December 2024 */
-  .folder {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: white;
-    background-color: #2A2A2A; 
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .folder:hover {
-    background-color: #3A3A3A; 
-  }
-  
-  .folder i {
-    margin-right: 10px; 
-  }
-  
-  
-  /* Recent Chats Text */
-  .recent-chats {
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 15px; 
-    margin-bottom: 10px; 
-  }
-  
-  /* Recent Chat Button */
-  .chat-button {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: white;
-    background-color: #2A2A2A;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .chat-button:hover {
-    background-color: #3A3A3A; 
-  }
-  
-  .chat-button i {
-    margin-right: 10px; 
-  }
-  
-  /* Profile Button */
-  .profile-btn {
-    margin-top: 20px;
-    background-color: #242723;
-    color: white;
-    border: none;
-    padding: 10px 20px; 
-    border-radius: 10px; 
-    font-size: 16px;
-    font-weight: bold;
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    gap: 10px; 
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .profile-btn:hover {
-    background-color: #3A3A3A; 
-  }
-  
-  /* Profile Icon */
-  .profile-icon {
-    width: 20px; 
-    height: auto;
-  }
-  
-  /* Menu styles */
-  .menu {
-    display: flex;
-    align-items: center;
-    background-color: rgba(140, 140, 140, 0.1); 
-    padding: 10px 20px;
-    position: fixed; 
-    top: 20px; 
-    z-index: 10; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    margin: 0 auto; 
-    left: 60%;
-    transform: translateX(-50%); 
-    width: fit-content; 
-  }
-  
-  .menu-logo {
-    font-size: 36px;
-    font-weight: 750;
-    background: linear-gradient(to bottom, black, #00BF63);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-right: 30px;
-    white-space: nowrap;
-  }
-  /* Menu list styles */
-  .menu ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    gap: 40px; 
-    padding: 0;
-    margin: 0;
-  }
-  
-  
-  .menu a {
-    color: #000000;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 10px 20px;
-    border-radius: 20px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .menu a:hover {
-    background-color: black;
-    color: white;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  display: flex;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 300px;
+  height: 100vh;
+  background-color: #111111;
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px; 
+}
+
+/* Sidebar toggle image */
+.sidebar-toggle {
+width: 30px; /* Adjust size as needed */
+height: auto;
+cursor: pointer;
+transition: transform 0.3s ease;
+}
+
+/* Sidebar hidden state */
+.sidebar.hidden {
+transform: translateX(-300px); /* Hide sidebar */
+transition: transform 0.3s ease;
+}
+
+
+.sidebar.hidden + .content {
+margin-left: 0; /* Adjust content width when sidebar is hidden */
+}
+
+/* Show Sidebar Button */
+.sidebar-show {
+position: absolute;
+top: 20px; /* Align with the logo */
+left: 0;
+width: 50px; /* Adjust size to match the toggle button */
+height: auto;
+cursor: pointer;
+transition: opacity 0.3s ease, transform 0.3s ease;
+z-index: 11; /* Above content but below sidebar */
+}
+
+/* Hidden state for Show Sidebar Button */
+.hidden {
+opacity: 0;
+pointer-events: none;
+}
+
+/* Visible state for Show Sidebar Button */
+.sidebar-show.visible {
+opacity: 1;
+pointer-events: auto;
+}
+
+/* Logo container */
+.logo-container {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between; 
+  margin-bottom: 10px; 
+}
+
+/* Logo image */
+.logo-image {
+  width: 50px;
+  height: auto;
+}
+
+/* Three dots */
+.more-dots {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Content area styles */
+.content {
+  margin-left: 300px; 
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Profile Button */
+.profile-btn {
+  margin-top: 20px;
+  background-color: #242723;
+  color: white;
+  border: none;
+  padding: 10px 20px; 
+  border-radius: 10px; 
+  font-size: 16px;
+  font-weight: bold;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  gap: 10px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile-btn:hover {
+  background-color: #3A3A3A; 
+}
+
+/* Profile Icon */
+.profile-icon {
+  width: 20px; 
+  height: auto;
+}
+
+/* Menu styles */
+.menu {
+  display: flex;
+  align-items: center;
+  background-color: rgba(140, 140, 140, 0.1); 
+  padding: 10px 20px;
+  position: fixed; 
+  top: 20px; 
+  z-index: 10; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  margin: 0 auto; 
+  left: 60%;
+  transform: translateX(-50%); 
+  width: fit-content; 
+}
+
+.menu-logo {
+  font-size: 36px;
+  font-weight: 750;
+  background: linear-gradient(to bottom, black, #00BF63);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-right: 30px;
+  white-space: nowrap;
+}
+/* Menu list styles */
+.menu ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  gap: 40px; 
+  padding: 0;
+  margin: 0;
+}
+
+
+.menu a {
+  color: #000000;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.menu a:hover {
+  background-color: black;
+  color: white;
+}
 /* Wallet container */
 /* Wallet container */
 .wallet-container {
-    width: 90%; /* Center within the content area */
-    max-width: 400px;
-    margin: 20px auto; /* Center horizontally with auto */
-    position: relative;
-    text-align: center; /* Ensures text aligns properly */
+  width: 90%; /* Center within the content area */
+  max-width: 400px;
+  margin: 20px auto; /* Center horizontally with auto */
+  position: relative;
+  text-align: center; /* Ensures text aligns properly */
 }
 
 /* See Wallet Text */
 .see-wallet-text {
-    position: absolute; /* Position relative to the container */
-    top: 10px;
-    left: -10px; /* Align to the left of the image */
-    font-size: 30px; /* Adjust the size of the text */
-    font-weight: bold;
-    color: #000; /* Default color for "See" */
-    z-index: 10; /* Ensure it appears above the image */
-    text-align: center; /* Center the text */
-  }
-  
+  position: absolute; /* Position relative to the container */
+  top: 10px;
+  left: -10px; /* Align to the left of the image */
+  font-size: 30px; /* Adjust the size of the text */
+  font-weight: bold;
+  color: #000; /* Default color for "See" */
+  z-index: 10; /* Ensure it appears above the image */
+  text-align: center; /* Center the text */
+}
+
 /* Wallet rectangle */
 .wallet-rectangle {
-    background: linear-gradient(90deg, #00BF63, #00592E);
-    border-radius: 15px;
-    border: 1px solid black;
-    height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 70px; /* Space between the wallet rectangle and previous elements */
+  background: linear-gradient(90deg, #00BF63, #00592E);
+  border-radius: 15px;
+  border: 1px solid black;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 70px; /* Space between the wallet rectangle and previous elements */
 }
 
 /* Wallet amount text */
 .wallet-amount {
-    font-size: 48px;
-    font-weight: bold;
-    color: white;
-    margin: 0; /* Remove extra margin */
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  margin: 0; /* Remove extra margin */
 }
 
 /* Expand icon */
 .expand-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 40px;
-    height: auto;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: auto;
+  cursor: pointer;
 }
 
 /* Hefty Text */
 h1 {
-    font-size: 30px;
-    font-weight: bold;
-    color: #000;
-    margin-top: 15px; /* Space above the text */
-    white-space: nowrap; /* Prevent breaking onto new lines */
-    text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: #000;
+  margin-top: 15px; /* Space above the text */
+  white-space: nowrap; /* Prevent breaking onto new lines */
+  text-align: center;
 }
 
 /* Gradient text */
 .gradient-text-nu,
 .gradient-text {
-    background: linear-gradient(to bottom, black, #00BF63); /* Gradient for Piggy */
-    -webkit-background-clip: text; /* Clip the gradient to text */
-    -webkit-text-fill-color: transparent; /* Make the text fill transparent */
-    position: relative; /* Required for the underline */
-    display: inline-block; /* Ensure the pseudo-element positions correctly */
+  background: linear-gradient(to bottom, black, #00BF63); /* Gradient for Piggy */
+  -webkit-background-clip: text; /* Clip the gradient to text */
+  -webkit-text-fill-color: transparent; /* Make the text fill transparent */
+  position: relative; /* Required for the underline */
+  display: inline-block; /* Ensure the pseudo-element positions correctly */
 }
 
 .gradient-text::after {
-    content: ''; /* Adds an underline */
-    display: block; /* Make it appear as a line */
-    width: 100%; /* Match the width of the text */
-    height: 3px; /* Thickness of the underline */
-    background: linear-gradient(to right, black, #00BF63); /* Gradient for the underline */
-    position: absolute; /* Align it properly */
-    left: 0; /* Align with the text */
-    bottom: -2px; /* Place just below the text */
-  }
+  content: ''; /* Adds an underline */
+  display: block; /* Make it appear as a line */
+  width: 100%; /* Match the width of the text */
+  height: 3px; /* Thickness of the underline */
+  background: linear-gradient(to right, black, #00BF63); /* Gradient for the underline */
+  position: absolute; /* Align it properly */
+  left: 0; /* Align with the text */
+  bottom: -2px; /* Place just below the text */
+}
 
 
-  /* Input bar styles */
-  .input-container {
-    position: fixed;
-    bottom: 50px;
-    left: 340px; 
-    right: 40px;
-    background-color: rgba(140, 140, 140, 0.1); 
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-  }
-  
-  
-  
-  .input-bar {
-    flex: 1;
-    padding: 10px;
-    border-radius: 20px;
-    border: rgba(140, 140, 140, 0.1); 
-    font-size: 16px;
-    font-family: 'Poppins', Arial, sans-serif;
-  }
-  
-  .send-btn {
-    background-color: #00BF63;
-    color: white;
-    font-size: 20px;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 10px;
-    cursor: pointer;
-  }
-  
-  .send-btn:hover {
-    background-color: #056e02;
-  }
-  
-  .logo-image {
-    width: 50px;
-    height: auto; 
-  }
-  
-  
-  
-  .gradient-text {
-    background: linear-gradient(to bottom, black, #00BF63);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  .menu-icon {
-    position: absolute; 
-    top: 20px; 
-    right: 20px; 
-    width: 40px; 
-    height: auto;
-    cursor: pointer; 
-  }
-  
-  .glow {
-    position: absolute; 
-    border-radius: 50%; 
-    background-color: rgba(0, 191, 99, 0.4); 
+/* Input bar styles */
+.input-container {
+  position: fixed;
+  bottom: 50px;
+  left: 340px; 
+  right: 40px;
+  background-color: rgba(140, 140, 140, 0.1); 
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+
+
+
+.input-bar {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: rgba(140, 140, 140, 0.1); 
+  font-size: 16px;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+.send-btn {
+  background-color: #00BF63;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.send-btn:hover {
+  background-color: #056e02;
+}
+
+.logo-image {
+  width: 50px;
+  height: auto; 
+}
+
+
+
+.gradient-text {
+  background: linear-gradient(to bottom, black, #00BF63);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.menu-icon {
+  position: absolute; 
+  top: 20px; 
+  right: 20px; 
+  width: 40px; 
+  height: auto;
+  cursor: pointer; 
+}
+
+.glow {
+  position: absolute; 
+  border-radius: 50%; 
+  background-color: rgba(0, 191, 99, 0.4); 
+  box-shadow: 0 0 50px 30px rgba(0, 191, 99, 0.8);
+  pointer-events: none;
+  z-index: 5; 
+}
+
+/* Base glow class */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(0, 191, 99, 0.4);
+  box-shadow: 0 0 50px 30px rgba(0, 191, 99, 0.8); 
+  pointer-events: none; 
+  z-index: 5; 
+}
+
+/* Glowing areas */
+.glow {
+  position: absolute;
+  box-shadow: 0 0 100px 100px rgba(0, 191, 99, 0.2); 
+  pointer-events: none;
+  z-index: 5; 
+}
+
+/* Glow area 1: Centered */
+.glow-area-1 {
+  top: 40%; 
+  left: 60%; 
+  transform: translate(-50%, -50%); 
+  width: 0;
+  height: 0;
+}
+
+/* Glow area 2: Top-right corner */
+.glow-area-2 {
+  top: 20px; 
+  right: 20px; 
+  width: 0;
+  height: 0;
+}
+
+/* Glow area 3: Centered far left */
+.glow-area-3 {
+  top: 50%; 
+  left: 50px; 
+  transform: translateY(-50%); 
+  width: 0;
+  height: 0;
+}
+
+/* Glow area 4: Near input bar */
+.glow-area-4 {
+  bottom: 70px; 
+  left: 340px;
+  width: 0;
+  height: 0;
+}
+
+
+@keyframes pulse {
+  0%, 100% {
     box-shadow: 0 0 50px 30px rgba(0, 191, 99, 0.8);
-    pointer-events: none;
-    z-index: 5; 
   }
-  
-  /* Base glow class */
-  .glow {
-    position: absolute;
-    border-radius: 50%;
-    background-color: rgba(0, 191, 99, 0.4);
-    box-shadow: 0 0 50px 30px rgba(0, 191, 99, 0.8); 
-    pointer-events: none; 
-    z-index: 5; 
+  50% {
+    box-shadow: 0 0 70px 40px rgba(0, 191, 99, 1);
   }
-  
-  /* Glowing areas */
-  .glow {
-    position: absolute;
-    box-shadow: 0 0 100px 100px rgba(0, 191, 99, 0.2); 
-    pointer-events: none;
-    z-index: 5; 
-  }
-  
-  /* Glow area 1: Centered */
-  .glow-area-1 {
-    top: 40%; 
-    left: 60%; 
-    transform: translate(-50%, -50%); 
-    width: 0;
-    height: 0;
-  }
-  
-  /* Glow area 2: Top-right corner */
-  .glow-area-2 {
-    top: 20px; 
-    right: 20px; 
-    width: 0;
-    height: 0;
-  }
-  
-  /* Glow area 3: Centered far left */
-  .glow-area-3 {
-    top: 50%; 
-    left: 50px; 
-    transform: translateY(-50%); 
-    width: 0;
-    height: 0;
-  }
-  
-  /* Glow area 4: Near input bar */
-  .glow-area-4 {
-    bottom: 70px; 
-    left: 340px;
-    width: 0;
-    height: 0;
-  }
-  
-  
-  @keyframes pulse {
-    0%, 100% {
-      box-shadow: 0 0 50px 30px rgba(0, 191, 99, 0.8);
-    }
-    50% {
-      box-shadow: 0 0 70px 40px rgba(0, 191, 99, 1);
-    }
-  }
-  
-  .pulsing-glow {
-    animation: pulse 2s infinite; 
-  }
-  
+}
+
+.pulsing-glow {
+  animation: pulse 2s infinite; 
+}
+
 /* Container for the buttons */
 .button-container {
-    position: fixed;
-    bottom: 155px; 
-    left: 735px; 
-    transform: translateX(-50%); 
-    display: flex;
-    gap: 60px; 
-    z-index: 10; 
-  }
-  
-  /* Button styles */
-  .action-button {
-    background: linear-gradient(90deg, #202020, #ffffff); 
-    color: white; 
-    font-size: 13px; 
-    font-family: 'Poppins', Arial, sans-serif;
-    padding: 13px 26px; 
-    border: 1px solid #202020;
-    border-radius: 20px; 
-    cursor: pointer; 
-    transition: background-color 0.3s ease, transform 0.3s ease; 
-  }
-  
-  /* Hover effect */
-  .action-button:hover {
-    background: linear-gradient(90deg, #ffffff, #202020); 
-    transform: scale(1.05); 
-  }
-  
+  position: fixed;
+  bottom: 155px; 
+  left: 735px; 
+  transform: translateX(-50%); 
+  display: flex;
+  gap: 60px; 
+  z-index: 10; 
+}
+
+/* Button styles */
+.action-button {
+  background: linear-gradient(90deg, #000000, #00BF63);
+  color: white; 
+  font-size: 13px; 
+  font-family: 'Poppins', Arial, sans-serif;
+  padding: 13px 26px; 
+  border: 1px solid #202020;
+  border-radius: 20px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+/* Hover effect */
+.action-button:hover {
+  background: linear-gradient(90deg, #00BF63, #000000);
+  transform: scale(1.05); 
+}
+
+/* Modal Styles */
+.modal {
+display: none;
+position: fixed;
+z-index: 10;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+background-color: #111111;
+margin: 10% auto;
+padding: 20px;
+border-radius: 10px;
+width: 40%;
+color: white;
+font-family: 'Poppins', Arial, sans-serif;
+}
+
+.close-btn {
+color: white;
+float: right;
+font-size: 24px;
+cursor: pointer;
+}
+
+.wallet-data {
+margin-top: 20px;
+}
+
+.wallet-item {
+display: flex;
+justify-content: space-between;
+margin-bottom: 10px;
+font-size: 16px;
+}
+
+.wallet-item label {
+font-weight: bold;
+}
+
+.wallet-item span {
+color: #00BF63;
+}
