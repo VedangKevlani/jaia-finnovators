@@ -298,8 +298,9 @@
     margin: 0 auto; 
     left: 60%;
     transform: translateX(-50%); 
-    width: fit-content; 
+    width: fit-content;
   }
+
   
   .menu-logo {
     font-size: 36px;
