@@ -29,7 +29,7 @@
 
   /* Sidebar toggle image */
 .sidebar-toggle {
-  width: 30px; /* Adjust size as needed */
+  width: 30px; 
   height: auto;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -37,25 +37,25 @@
 
 /* Sidebar hidden state */
 .sidebar.hidden {
-  transform: translateX(-300px); /* Hide sidebar */
+  transform: translateX(-300px); 
   transition: transform 0.3s ease;
 }
 
 
 .sidebar.hidden + .content {
-  margin-left: 0; /* Adjust content width when sidebar is hidden */
+  margin-left: 0; 
 }
 
 /* Show Sidebar Button */
 .sidebar-show {
   position: absolute;
-  top: 20px; /* Align with the logo */
+  top: 20px; 
   left: 0;
-  width: 50px; /* Adjust size to match the toggle button */
+  width: 50px; 
   height: auto;
   cursor: pointer;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  z-index: 11; /* Above content but below sidebar */
+  z-index: 11; 
 }
 
 /* Hidden state for Show Sidebar Button */
@@ -105,13 +105,14 @@
   
   /* Profile Button */
   .profile-btn {
-    margin-top: 20px;
+    margin-top: 470px;
     background-color: #242723;
     color: white;
     border: none;
     padding: 10px 20px; 
     border-radius: 10px; 
     font-size: 16px;
+    font-family: 'Poppins', Arial, sans-serif;
     font-weight: bold;
     display: flex; 
     align-items: center; 
@@ -182,26 +183,26 @@
     background-color: black;
     color: white;
   }
-/* Wallet container */
+
 /* Wallet container */
 .wallet-container {
-    width: 90%; /* Center within the content area */
+    width: 90%; 
     max-width: 400px;
-    margin: 20px auto; /* Center horizontally with auto */
+    margin: 20px auto; 
     position: relative;
-    text-align: center; /* Ensures text aligns properly */
+    text-align: center; 
 }
 
 /* See Wallet Text */
 .see-wallet-text {
-    position: absolute; /* Position relative to the container */
+    position: absolute; 
     top: 10px;
-    left: -10px; /* Align to the left of the image */
-    font-size: 30px; /* Adjust the size of the text */
+    left: -10px; 
+    font-size: 30px; 
     font-weight: bold;
-    color: #000; /* Default color for "See" */
-    z-index: 10; /* Ensure it appears above the image */
-    text-align: center; /* Center the text */
+    color: #000; 
+    z-index: 10; 
+    text-align: center; 
   }
   
 /* Wallet rectangle */
@@ -215,7 +216,7 @@
     align-items: center;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 70px; /* Space between the wallet rectangle and previous elements */
+    margin-top: 70px; 
 }
 
 /* Wallet amount text */
@@ -223,7 +224,7 @@
     font-size: 48px;
     font-weight: bold;
     color: white;
-    margin: 0; /* Remove extra margin */
+    margin: 0; 
 }
 
 /* Expand icon */
@@ -241,30 +242,30 @@ h1 {
     font-size: 30px;
     font-weight: bold;
     color: #000;
-    margin-top: 15px; /* Space above the text */
-    white-space: nowrap; /* Prevent breaking onto new lines */
+    margin-top: 15px; 
+    white-space: nowrap; 
     text-align: center;
 }
 
 /* Gradient text */
 .gradient-text-nu,
 .gradient-text {
-    background: linear-gradient(to bottom, black, #00BF63); /* Gradient for Piggy */
-    -webkit-background-clip: text; /* Clip the gradient to text */
-    -webkit-text-fill-color: transparent; /* Make the text fill transparent */
-    position: relative; /* Required for the underline */
-    display: inline-block; /* Ensure the pseudo-element positions correctly */
+    background: linear-gradient(to bottom, black, #00BF63);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+    position: relative; 
+    display: inline-block; 
 }
 
 .gradient-text::after {
-    content: ''; /* Adds an underline */
-    display: block; /* Make it appear as a line */
-    width: 100%; /* Match the width of the text */
-    height: 3px; /* Thickness of the underline */
-    background: linear-gradient(to right, black, #00BF63); /* Gradient for the underline */
-    position: absolute; /* Align it properly */
-    left: 0; /* Align with the text */
-    bottom: -2px; /* Place just below the text */
+    content: '';
+    display: block; 
+    width: 100%; 
+    height: 3px; 
+    background: linear-gradient(to right, black, #00BF63); 
+    position: absolute; 
+    left: 0; 
+    bottom: -2px; 
   }
 
 
@@ -453,37 +454,121 @@ h1 {
 }
 
 .modal-content {
-  background-color: #111111;
+  background-color: #222;
   margin: 10% auto;
-  padding: 20px;
-  border-radius: 10px;
-  width: 40%;
+  padding: 30px;
+  border-radius: 20px;
+  width: 50%;
   color: white;
   font-family: 'Poppins', Arial, sans-serif;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
 }
 
+.modal-content h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #00BF63;
+}
+
+/* Close Button */
 .close-btn {
   color: white;
   float: right;
-  font-size: 24px;
+  font-size: 30px;
   cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 30px;
 }
 
+/* Wallet Data Table */
 .wallet-data {
+  display: table;
+  width: 100%;
   margin-top: 20px;
+  border-spacing: 10px 15px;
 }
 
 .wallet-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  display: table-row;
+  background-color: #333;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+}
+
+.wallet-item label,
+.wallet-item span {
+  display: table-cell;
+  padding: 10px;
   font-size: 16px;
 }
 
 .wallet-item label {
   font-weight: bold;
+  color: white;
+  text-align: left;
 }
 
 .wallet-item span {
   color: #00BF63;
+  text-align: right;
+}
+
+/* Highlight Wallet Rows */
+.wallet-item {
+  background: linear-gradient(90deg, #111, #222);
+  border: 1px solid #444;
+}
+
+.wallet-item:hover {
+  background: linear-gradient(90deg, #00BF63, #00592E);
+  color: white;
+}
+
+.wallet-item label {
+  color: white;
+  font-weight: 600;
+}
+
+.wallet-item span {
+  color: white;
+  font-weight: bold;
+}
+
+/* Adjust Wallet Data Section Spacing */
+.wallet-item:first-child {
+  margin-top: 10px;
+}
+
+.wallet-item:last-child {
+  margin-bottom: 10px;
+}
+
+
+
+
+/* Tip container */
+.tips-container {
+  background-color: rgba(30, 30, 30, 0.64); 
+  width: calc(100% - 10px); 
+  max-width: 260px; 
+  height: calc(100vh - 300px); 
+  margin-top: 20px; 
+  padding: 20px;
+  overflow-y: auto; 
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+}
+
+/* Tip Text */
+.tips {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 15px; 
+  margin-bottom: 10px; 
 }

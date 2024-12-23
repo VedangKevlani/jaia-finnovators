@@ -10,105 +10,110 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
+  <!-- Menu Icon -->
   <img src="/assets/menu.png" alt="Menu Icon" class="menu-icon">
+
   <!-- Sidebar -->
-<div class="sidebar">
-  <!-- Logo with three dots -->
-  <div class="logo-container">
-    <img src="/assets/Finnovators-removebg-preview.png" alt="Logo" class="logo-image">
-    <img src="/assets/sidebar.png" alt="Toggle Sidebar" class="sidebar-toggle">
+  <div class="sidebar">
+    <!-- Logo Container -->
+    <div class="logo-container">
+      <img src="/assets/Finnovators-removebg-preview.png" alt="Logo" class="logo-image">
+      <img src="/assets/sidebar.png" alt="Toggle Sidebar" class="sidebar-toggle">
+    </div>
+    
+    <!-- Begin New Chat Button -->
+    <button class="new-chat-btn">Begin New Chat +</button>
 
+    <!-- Chat Container -->
+    <div class="chat-container">
+      <!-- Search Container -->
+      <div class="search-container">
+        <img src="/assets/search.png" alt="Search Icon" class="search-icon">
+        <input type="text" class="search-bar" placeholder="Search chats...">
+      </div>
+
+      <!-- Year Text -->
+      <div class="year-text">Year 2024</div>
+
+      <!-- December Folder -->
+      <div class="folder">
+        <i class="fas fa-folder"></i> December 2024
+      </div>
+
+      <!-- Recent Chats Section -->
+      <div class="recent-chats">Recent Chats</div>
+      <div id="recent-chats-container">
+        <!-- Dynamic chats will appear here -->
+      </div>
+    </div>
+
+    <!-- Profile Button -->
+    <button class="profile-btn">
+      <img src="/assets/profile.png" alt="Profile Icon" class="profile-icon"> User Profile
+    </button>
   </div>
-  
-  <!-- Begin New Chat button -->
-  <button class="new-chat-btn">Begin New Chat  +</button>
 
-<!-- Chat Container -->
-<div class="chat-container">
- <!-- Search Container -->
-<div class="search-container">
-  <img src="/assets/search.png" alt="Search Icon" class="search-icon">
-  <input type="text" class="search-bar" placeholder="Search chats...">
-</div>
-
-
-  <!-- Year Text -->
-  <div class="year-text">Year 2024</div>
-
-  <!-- December Folder -->
-  <div class="folder">
-    <i class="fas fa-folder"></i> December 2024
-  </div>
-
-  <!-- Recent Chats Text -->
-  <div class="recent-chats">Recent Chats</div>
-
-  <!-- Placeholder for Recent Chats (Dynamic) -->
-  <div id="recent-chats-container">
-    <!-- New chats will be added here dynamically -->
-  </div>
-</div>
-
-<!-- Profile Button -->
-<button class="profile-btn">
-  <img src="/assets/profile.png" alt="Profile Icon" class="profile-icon">
-  User Profile
-</button>
-
-
-</div>
-<img src="/assets/sidebarshow.png" alt="Show Sidebar" class="sidebar-show hidden">
+  <!-- Sidebar Show Icon -->
+  <img src="/assets/sidebarshow.png" alt="Show Sidebar" class="sidebar-show hidden">
 
   <!-- Main Content Area -->
-<!-- Main Content Area -->
-<div class="content">
-  <span class="menu-logo">Finny.</span>
-  <div class="menu">
-    <ul>
-      <li><a href="#" class="tab-link" onclick="window.location.href='mainpage.html'">General</a></li>
-    <li><a href="#" class="tab-link" onclick="window.location.href='wallet.html'">My Wallet</a></li>
-    <li><a href="#" class="tab-link" onclick="window.location.href='goals.html'">My Goals</a></li>
-    <li><a href="#" class="tab-link" onclick="window.location.href='piggy.html'">My Piggy</a></li>
-    </ul>
+  <div class="content">
+    <!-- Logo -->
+    <span class="menu-logo">Finny.</span>
+
+    <!-- Menu Navigation -->
+    <div class="menu">
+      <ul>
+        <li><a href="mainpage.html" class="tab-link">General</a></li>
+        <li><a href="wallet.html" class="tab-link">My Wallet</a></li>
+        <li><a href="goals.html" class="tab-link">My Goals</a></li>
+        <li><a href="piggy.html" class="tab-link">My Piggy</a></li>
+      </ul>
+    </div>
+
+    <!-- Intro Section -->
+    <div class="intro">
+      <img src="/assets/Finnovators-removebg-preview.png" alt="Logo" class="finny-image">
+      <h1>I'm <span class="gradient-text">Finny</span>, how may I <span class="gradient-text">assist</span> you today?</h1>
+      <p>
+        Be financially aware and get expert guidance powered by <br>
+        our AI agent who specializes in Budgeting and Saving. Finny gives <br>
+        excellent advice and is here to make you financially wise.
+      </p>
+    </div>
+
+    <!-- Chat Messages Container -->
+    <div class="chat-messages"></div>
   </div>
-  
-  <!-- Intro Section -->
-  <div class="intro">
-    <img src="/assets/Finnovators-removebg-preview.png" alt="Logo" class="finny-image">
-    <h1>I'm <span class="gradient-text">Finny</span>, how may I <span class="gradient-text">assist</span> you today?</h1>
-    <p>Be financially aware and get expert guidance powered by <br>our AI agent who specializes in Budgeting and Saving. Finny gives <br>excellent advice and is here to make you financially wise.</p>
-  </div>
 
-  <!-- Chat Messages Container -->
-  <div class="chat-messages"></div>
-</div>
-
-
-  <!-- Input Bar at the Bottom -->
+  <!-- Input Bar -->
   <div class="input-container">
     <input type="text" placeholder="Type your prompt here..." class="input-bar">
     <button class="send-btn">🡢</button>
   </div>
-  
-  <!-- Delete Confirmation Popup -->
-<div class="delete-popup hidden">
-  <div class="popup-content">
-    <p>Are you sure you want to delete this chat?</p>
-    <div class="popup-buttons">
-      <button class="popup-delete-btn">Delete</button>
-      <button class="popup-cancel-btn">Cancel</button>
-    </div>
+
+  <!-- Action Buttons -->
+  <div class="button-container">
+    <button id="afford-btn" class="action-button">Can I afford this?</button>
+    <button id="finance-report-btn" class="action-button">Show me my Finance Report</button>
   </div>
 </div>
 
+  <!-- Delete Confirmation Popup -->
+  <div class="delete-popup hidden">
+    <div class="popup-content">
+      <p>Are you sure you want to delete this chat?</p>
+      <div class="popup-buttons">
+        <button class="popup-delete-btn">Delete</button>
+        <button class="popup-cancel-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
 
-<!-- Glow Areas -->
+  <!-- Glow Areas -->
   <div class="glow glow-area-1"></div>
   <div class="glow pulsing-glow glow-area-2"></div>
   <div class="glow glow-area-3"></div>
   <div class="glow pulsing-glow glow-area-4"></div>
-
-
 </body>
 </html>

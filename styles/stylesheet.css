@@ -27,40 +27,47 @@ body {
     flex-direction: column;
     justify-content: center;
     padding: 40px;
-    background: linear-gradient(to right, white, #00BF63);
-    color: black;
+    background: linear-gradient(to right, #003300, #00BF63); /* Dark green to neon green */
+    color: white; /* Ensure text contrasts well */
 }
 
+/* Gradient Title */
 .gradient-title {
     font-size: 48px;
-    font-weight: 600;
-    background: linear-gradient(to bottom, black, #00BF63);
+    font-weight: 700; /* Make it bold */
+    background: linear-gradient(to bottom, #00FF66, #00BF63); /* Neon green effect */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 20px;
+    text-shadow: 0 0 10px #00FF66, 0 0 20px #00FF66, 0 0 30px #00FF66; /* Neon glow */
 }
 
+/* Typewriter Text */
 .typewriter {
-    font-size: 32px;
-    font-weight: 400;
+    font-size: 36px; /* Increase size slightly */
+    font-weight: 700; /* Bold text */
     white-space: nowrap;
     overflow: hidden;
-    border-right: 3px solid black;
+    border-right: 3px solid #00FF66; /* Neon green border for typewriter effect */
     width: fit-content;
-    position: relative; /* Required for positioning the green circle */
+    position: relative;
+    color: white;
 }
 
+/* Green Circle */
 .green-circle {
-    width: 10px;
-    height: 10px;
-    background-color: #00BF63;
+    width: 20px;
+    height: 20px;
+    background-color: #00FF66; /* Neon green for the circle */
     border-radius: 50%;
     position: absolute;
-    top: 50%; /* Align vertically with the text */
+    top: 50%;
     transform: translateY(-50%);
-    left: 0; /* Initial position aligned with the start of the text */
-    transition: left 0.1s ease; /* Smooth movement */
+    left: 0;
+    transition: left 0.1s ease;
+    box-shadow: 0 0 10px #00FF66, 0 0 20px #00FF66, 0 0 30px #00FF66; /* Neon glow for circle */
 }
+
 
 
 /* Animation for the circle pulsing */
@@ -94,6 +101,17 @@ body {
     margin-bottom: 20px;
 }
 
+/* Button Container */
+.right-section .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Spacing between buttons */
+    margin-top: 20px;
+    z-index: 10;
+}
+
+/* Buttons */
+/* Get Started Buttons */
 .get-started-btn {
     background-color: white;
     color: black;
@@ -104,16 +122,23 @@ body {
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    margin-top: 20px; /* Added margin for spacing */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Added smooth transitions for all effects */
+    margin-top: 20px;
+    z-index: 10;
 }
 
 .get-started-btn:hover {
-    background-color: #00BF63;
-    color: white;
-    transform: scale(1.1);
-    box-shadow: 0 8px 15px rgba(0, 191, 99, 0.5);
+    background-color: #00BF63; /* Smoothly transition to neon green */
+    color: white; /* Smoothly change text color */
+    transform: scale(1.1); /* Smoothly increase size */
+    box-shadow: 0 8px 15px rgba(0, 191, 99, 0.5); /* Add a glowing shadow */
 }
+
+.get-started-btn:active {
+    transform: scale(0.95); /* Slightly shrink on click */
+    box-shadow: 0 4px 8px rgba(0, 191, 99, 0.4); /* Reduce shadow intensity */
+}
+
 
 /* Footer */
 .footer {
@@ -126,9 +151,9 @@ body {
 }
 
 .footer img {
-    width: 180px; /* Reduced size */
+    width: 180px; 
     height: auto;
-    margin-bottom: 3px; /* Positioned 3px above the footer */
+    margin-bottom: 3px; 
 }
 
 .footer a {
