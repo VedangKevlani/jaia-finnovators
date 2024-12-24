@@ -110,9 +110,19 @@ body {
     z-index: 10;
 }
 
-/* Buttons */
-/* Get Started Buttons */
+/* Adjusted Google Icon for left alignment */
+.google-icon {
+    width: 20px; /* Scale the image down */
+    height: 20px; /* Ensure it maintains proportions */
+    margin-right: 10px; /* Add spacing between icon and text */
+    position: static; /* Remove absolute positioning */
+}
+
+/* Adjust button styles for inline content */
 .get-started-btn {
+    display: inline-flex; /* Enable inline layout for icon and text */
+    align-items: center; /* Vertically align icon and text */
+    justify-content: center; /* Center the content */
     background-color: white;
     color: black;
     font-size: 18px;
@@ -122,22 +132,23 @@ body {
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Added smooth transitions for all effects */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     margin-top: 20px;
     z-index: 10;
 }
 
 .get-started-btn:hover {
-    background-color: #00BF63; /* Smoothly transition to neon green */
-    color: white; /* Smoothly change text color */
-    transform: scale(1.1); /* Smoothly increase size */
-    box-shadow: 0 8px 15px rgba(0, 191, 99, 0.5); /* Add a glowing shadow */
+    background-color: #00BF63;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 8px 15px rgba(0, 191, 99, 0.5);
 }
 
 .get-started-btn:active {
-    transform: scale(0.95); /* Slightly shrink on click */
-    box-shadow: 0 4px 8px rgba(0, 191, 99, 0.4); /* Reduce shadow intensity */
+    transform: scale(0.95);
+    box-shadow: 0 4px 8px rgba(0, 191, 99, 0.4);
 }
+
 
 
 /* Footer */

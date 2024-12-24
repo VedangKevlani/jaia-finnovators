@@ -1,125 +1,173 @@
+import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { db } from "./firebaseconf.js";
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Open and Close Goal Modal
-  document.getElementById("set-goal-btn").addEventListener("click", () => {
-      document.getElementById("goal-modal").classList.remove("hidden");
-  });
+  const auth = getAuth();
 
-  document.getElementById("cancel-goal-btn").addEventListener("click", () => {
-      document.getElementById("goal-modal").classList.add("hidden");
-      resetGoalModal();
-  });
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      alert("User is not logged in.");
+      return;
+    }
 
-  document.getElementById("confirm-goal-btn").addEventListener("click", () => {
-      const description = document.getElementById("goal-description").value;
-      const cost = document.getElementById("goal-cost").value;
-      const timeline = document.getElementById("goal-timeline").value;
+    const userId = user.uid;
 
-      if (description && cost && timeline) {
-          addOrUpdateGoal(description, cost, timeline);
-          resetGoalModal();
-          document.getElementById("goal-modal").classList.add("hidden");
+    // Reference to the user's walletData
+    const walletRef = doc(db, "users", userId, "walletData", "financialData");
+
+    // Helper Functions
+    const getCurrentBalance = () => {
+      const piggyBalanceElement = document.getElementById("piggy-balance");
+      return parseFloat(piggyBalanceElement.textContent.replace(/[^0-9.-]+/g, "")) || 0;
+    };
+
+    const updateBalance = (newBalance) => {
+      const piggyBalanceElement = document.getElementById("piggy-balance");
+      piggyBalanceElement.textContent = newBalance.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2,
+      });
+
+      // Update piggy descriptive text
+    updatePiggyDescriptiveText(newBalance);
+    };
+
+    const updatePiggyDescriptiveText = (balance) => {
+      const piggyDescriptiveText = document.querySelector(".gradient-text-nu");
+      if (balance >= 20000) {
+        piggyDescriptiveText.textContent = "well-fed!";
+      } else if (balance <= 10000) {
+        piggyDescriptiveText.textContent = "hungry!";
       } else {
-          alert("Please fill in all fields.");
+        piggyDescriptiveText.textContent = "average!";
       }
-  });
+    };
+  
 
-  function resetGoalModal() {
-      document.getElementById("goal-description").value = "";
-      document.getElementById("goal-cost").value = "";
-      document.getElementById("goal-timeline").value = "";
-      document.getElementById("confirm-goal-btn").dataset.editing = "";
-  }
+    const loadSavings = async () => {
+      try {
+        const walletSnapshot = await getDoc(walletRef);
+        if (walletSnapshot.exists()) {
+          const data = walletSnapshot.data();
+          updateBalance(data.savings || 0); // Initialize piggy-balance with savings
+        } else {
+          console.log("No wallet data found.");
+        }
+      } catch (error) {
+        console.error("Error loading savings data:", error);
+      }
+    };
 
-  function addOrUpdateGoal(description, cost, timeline) {
-      const formattedCost = parseFloat(cost).toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-          minimumFractionDigits: 2,
-      });
+    const saveSavings = async (newBalance) => {
+      try {
+        await updateDoc(walletRef, { savings: newBalance });
+        console.log("Savings updated in Firestore.");
+      } catch (error) {
+        console.error("Error updating savings in Firestore:", error);
+      }
+    };
 
-      const goalContainer = document.getElementById("goals-container");
-      const editing = document.getElementById("confirm-goal-btn").dataset.editing;
+    // Modal Elements
+    const piggyModal = document.getElementById("piggy-bank-modal");
+    const piggyText = document.querySelector(".see-piggy-text");
+    const piggyImage = document.querySelector(".piggy-image");
+    const closePiggyModalBtn = document.getElementById("close-piggy-modal-btn");
 
-      if (editing) {
-          // Update existing goal
-          const goalDiv = document.querySelector(`[data-id="${editing}"]`);
-          goalDiv.innerHTML = `
-              <span class="star-icon">
-                  ★
-              </span>
-              ${description} for ${formattedCost} by ${timeline}
-              <span class="edit-icon" data-description="${description}" data-cost="${cost}" data-timeline="${timeline}">
-                  ✎
-              </span>
-              <span class="delete-icon">
-                  🗑
-              </span>
-          `;
+    const addPiggyModal = document.getElementById("add-to-piggy-modal");
+    const addPiggyInput = document.getElementById("add-piggy-input");
+    const confirmAddPiggyBtn = document.getElementById("confirm-add-piggy-btn");
+    const cancelAddPiggyBtn = document.getElementById("cancel-add-piggy-btn");
+    const addToPiggyBtn = document.getElementById("add-to-piggy-btn");
 
-          addGoalEventListeners(goalDiv);
+    const dipPiggyModal = document.getElementById("dip-in-piggy-modal");
+    const dipPiggyInput = document.getElementById("dip-in-piggy-input");
+    const confirmDipPiggyBtn = document.getElementById("confirm-dip-in-piggy-btn");
+    const cancelDipPiggyBtn = document.getElementById("cancel-dip-in-piggy-btn");
+    const dipInPiggyBtn = document.getElementById("dip-in-piggy-btn");
+
+    const emptyPiggyBtn = document.getElementById("empty-piggy-btn");
+
+    const openModal = (modal) => modal.classList.remove("hidden");
+    const closeModal = (modal) => modal.classList.add("hidden");
+
+    // Event Listeners for Piggy Modal
+    piggyText?.addEventListener("click", () => openModal(piggyModal));
+    piggyImage?.addEventListener("click", () => openModal(piggyModal));
+    closePiggyModalBtn?.addEventListener("click", () => closeModal(piggyModal));
+
+    // Add to Piggy
+    addToPiggyBtn?.addEventListener("click", () => {
+      addPiggyInput.value = ""; // Clear input field
+      openModal(addPiggyModal);
+    });
+
+    confirmAddPiggyBtn?.addEventListener("click", async () => {
+      const addedAmount = parseFloat(addPiggyInput.value);
+      if (!isNaN(addedAmount) && addedAmount > 0) {
+        const newBalance = getCurrentBalance() + addedAmount;
+        updateBalance(newBalance);
+        await saveSavings(newBalance); // Save to Firestore
+        closeModal(addPiggyModal);
       } else {
-          // Add new goal
-          const goalDiv = document.createElement("div");
-          goalDiv.className = "goal-rectangle";
-          goalDiv.dataset.id = `${Date.now()}`; // Unique ID for the goal
-
-          goalDiv.innerHTML = `
-              <span class="star-icon">
-                  ★
-              </span>
-              ${description} for ${formattedCost} by ${timeline}
-              <span class="edit-icon" data-description="${description}" data-cost="${cost}" data-timeline="${timeline}">
-                  ✎
-              </span>
-              <span class="delete-icon">
-                  🗑
-              </span>
-          `;
-
-          goalContainer.appendChild(goalDiv);
-          addGoalEventListeners(goalDiv);
+        alert("Please enter a valid amount.");
       }
-  }
+    });
 
-  function addGoalEventListeners(goalDiv) {
-      // Handle edit icon click
-      goalDiv.querySelector(".edit-icon").addEventListener("click", (event) => {
-          const description = event.target.getAttribute("data-description");
-          const cost = event.target.getAttribute("data-cost");
-          const timeline = event.target.getAttribute("data-timeline");
+    cancelAddPiggyBtn?.addEventListener("click", () => closeModal(addPiggyModal));
 
-          // Populate the modal with existing goal data
-          document.getElementById("goal-description").value = description;
-          document.getElementById("goal-cost").value = cost;
-          document.getElementById("goal-timeline").value = timeline;
+    // Dip in Piggy
+    dipInPiggyBtn?.addEventListener("click", () => {
+      dipPiggyInput.value = ""; // Clear input field
+      openModal(dipPiggyModal);
+    });
 
-          // Set editing ID
-          document.getElementById("confirm-goal-btn").dataset.editing = goalDiv.dataset.id;
+    confirmDipPiggyBtn?.addEventListener("click", async () => {
+      const dipAmount = parseFloat(dipPiggyInput.value);
+      if (!isNaN(dipAmount) && dipAmount > 0) {
+        const currentBalance = getCurrentBalance();
+        if (dipAmount > currentBalance) {
+          alert("You can't dip more than the current balance.");
+        } else {
+          const newBalance = currentBalance - dipAmount;
+          updateBalance(newBalance);
+          await saveSavings(newBalance); // Save to Firestore
+          closeModal(dipPiggyModal);
+        }
+      } else {
+        alert("Please enter a valid amount.");
+      }
+    });
 
-          // Show the modal for editing
-          document.getElementById("goal-modal").classList.remove("hidden");
-      });
+    cancelDipPiggyBtn?.addEventListener("click", () => closeModal(dipPiggyModal));
 
-      // Handle delete icon click
-      goalDiv.querySelector(".delete-icon").addEventListener("click", () => {
-          goalDiv.remove();
-      });
-  }
+    // Empty Piggy
+    emptyPiggyBtn?.addEventListener("click", async () => {
+      if (confirm("Are you sure you want to empty the piggy bank?")) {
+        updateBalance(0);
+        await saveSavings(0); // Save to Firestore
+      }
+    });
+
+    // Load initial savings data
+    await loadSavings();
+  });
 
   // Sidebar toggle functionality
   const sidebar = document.querySelector(".sidebar");
   const sidebarToggle = document.querySelector(".sidebar-toggle");
   const sidebarShow = document.querySelector(".sidebar-show");
 
-  sidebarToggle.addEventListener("click", () => {
-      sidebar.classList.add("hidden");
-      sidebarShow.classList.remove("hidden");
-      sidebarShow.classList.add("visible");
+  sidebarToggle?.addEventListener("click", () => {
+    sidebar.classList.add("hidden");
+    sidebarShow.classList.remove("hidden");
+    sidebarShow.classList.add("visible");
   });
 
-  sidebarShow.addEventListener("click", () => {
-      sidebar.classList.remove("hidden");
-      sidebarShow.classList.add("hidden");
-      sidebarShow.classList.remove("visible");
+  sidebarShow?.addEventListener("click", () => {
+    sidebar.classList.remove("hidden");
+    sidebarShow.classList.add("hidden");
+    sidebarShow.classList.remove("visible");
   });
 });

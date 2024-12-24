@@ -6,7 +6,7 @@
   <title>My Wallet | Finnovators AI</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="/styles/walletstyles.css">
-  <script src="/javascript/walletscripts.js" defer></script>
+  <script type="module" src="/javascript/walletscripts.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -67,38 +67,44 @@
       </span>
       <div class="wallet-rectangle">
         <img src="/assets/expand.png" alt="Expand Icon" class="expand-icon">
-        <p class="wallet-amount">$76,530.25</p>
+        <p class="wallet-amount" id="wallet-amount">Loading...</p>
+
       </div>
-      <h1>Your wallet is looking <span class="gradient-text-nu">hefty!</span></h1>
+      <h1>Your wallet is looking <span class="gradient-text-nu">....</span></h1>
     </div>
     
     <!-- Wallet Modal -->
-    <div id="wallet-modal" class="modal hidden">
-      <div class="modal-content">
-        <!-- Close Button -->
-        <span class="close-btn">&times;</span>
-        <h2>Wallet Details</h2>
-        <div class="wallet-data">
-          <div class="wallet-item">
-            <label>Income:</label>
-            <span id="wallet-income">$0.00</span>
-          </div>
-          <div class="wallet-item">
-            <label>Fixed Expenses:</label>
-            <span id="wallet-fixed-expenses">$0.00</span>
-          </div>
-          <div class="wallet-item">
-            <label>Variable Expenses:</label>
-            <span id="wallet-variable-expenses">$0.00</span>
-          </div>
-          <div class="wallet-item">
-            <label>Unplanned Expenses:</label>
-            <span id="wallet-unplanned-expenses">$0.00</span>
-          </div>
-        </div>
+<div id="wallet-modal" class="modal hidden">
+  <div class="modal-content">
+    <!-- Close Button -->
+    <span class="close-btn">&times;</span>
+    <h2>Wallet Details</h2>
+    <div class="wallet-data">
+      <div class="wallet-item">
+        <label>Income: $</label>
+        <input type="number" id="wallet-income" value="$0.00" class="stylish-input">
+      </div>
+      <div class="wallet-item">
+        <label>Fixed Expenses: $</label>
+        <input type="number" id="wallet-fixed-expenses" value="$0.00" class="stylish-input">
+      </div>
+      <div class="wallet-item">
+        <label>Variable Expenses: $</label>
+        <input type="number" id="wallet-variable-expenses" value="$0.00" class="stylish-input">
+      </div>
+      <div class="wallet-item">
+        <label>Unplanned Expenses: $</label>
+        <input type="number" id="wallet-unplanned-expenses" value="$0.00" class="stylish-input">
+      </div>
+      <div class="wallet-item">
+        <label>Savings: $</label>
+        <input type="number" id="wallet-savings" value="$0.00" class="stylish-input">
       </div>
     </div>
+    <button id="save-wallet" class="save-btn">Save</button>
   </div>
+</div>
+
 
   <!-- Glow Areas -->
   <div class="glow glow-area-1"></div>
