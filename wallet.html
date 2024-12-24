@@ -3,103 +3,113 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sidebar with Input Bar</title>
+  <title>My Wallet | Finnovators AI</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="styles/walletstyles.css">
+  <link rel="stylesheet" href="/styles/walletstyles.css">
+  <script type="module" src="/javascript/walletscripts.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <img src="assets/menu.png" alt="Menu Icon" class="menu-icon">
+  <!-- Menu Icon -->
+  <img src="/assets/menu.png" alt="Menu Icon" class="menu-icon">
+
   <!-- Sidebar -->
-<div class="sidebar">
-  <!-- Logo with three dots -->
-  <div class="logo-container">
-    <img src="assets/Finnovators-removebg-preview.png" alt="Logo" class="logo-image">
-    <span class="more-dots">⋮</span>
+  <div class="sidebar">
+    <!-- Logo Section -->
+    <div class="logo-container">
+      <img src="/assets/Finnovators-removebg-preview.png" alt="Logo" class="logo-image">
+      <img src="/assets/sidebar.png" alt="Toggle Sidebar" class="sidebar-toggle">
+    </div>
+
+    <!-- Wallet Tip of the Day -->
+    <div class="tips">Wallet Tip of the Day 💡</div>
+        <div id="tips-container">
+  <!-- Dynamic tip will appear here -->
+    </div>
+
+    <!-- Profile Button -->
+    <button class="profile-btn">
+      <img src="/assets/profile.png" alt="Profile Icon" class="profile-icon">
+      User Profile
+    </button>
   </div>
 
-  <!-- Begin New Chat button -->
-  <button class="new-chat-btn">Begin New Chat  +</button>
-
-<!-- Chat Container -->
-<div class="chat-container">
- <!-- Search Container -->
-<div class="search-container">
-  <img src="assets/search.png" alt="Search Icon" class="search-icon">
-  <input type="text" class="search-bar" placeholder="Search chats...">
-</div>
-
-
-  <!-- Year Text -->
-  <div class="year-text">Year 2024</div>
-
-  <!-- December Folder -->
-  <div class="folder">
-    <i class="fas fa-folder"></i> December 2024
-  </div>
-
-  <!-- Recent Chats Text -->
-  <div class="recent-chats">Recent Chats</div>
-
-  <!-- Placeholder for Recent Chats (Dynamic) -->
-  <div id="recent-chats-container">
-    <!-- New chats will be added here dynamically -->
-  </div>
-</div>
-
-<!-- Profile Button -->
-<button class="profile-btn">
-  <img src="assets/profile.png" alt="Profile Icon" class="profile-icon">
-  User Profile
-</button>
-
-
-</div>
-
+  <!-- Sidebar Toggle Icon -->
+  <img src="/assets/sidebarshow.png" alt="Show Sidebar" class="sidebar-show hidden">
 
   <!-- Main Content Area -->
-<div class="content">
-  <span class="menu-logo">Finny.</span>
-  <div class="menu">
-    <ul>
-      <li><a href="mainpage.html">General</a></li>
-      <li><a href="wallet.html">My Wallet</a></li>
-      <li><a href="#">My Goals</a></li>
-      <li><a href="piggy.html">Piggy</a></li>
-    </ul>
-  </div>
-  
-  
-  <!-- Buttons at the Bottom -->
-  <div class="button-container">
-    <button class="action-button">Income</button>
-    <button class="action-button">Fixed Expenses</button>
-    <button class="action-button">Variable Expenses</button>
-    <button class="action-button">Unplanned Expenses</button>
-  </div>
+  <div class="content">
+    <!-- Logo and Navigation Menu -->
+    <span class="menu-logo">Finny.</span>
+    <div class="menu">
+      <ul>
+        <li><a href="mainpage.html">General</a></li>
+        <li><a href="wallet.html">My Wallet</a></li>
+        <li><a href="goals.html">My Goals</a></li>
+        <li><a href="piggy.html">My Piggy</a></li>
+      </ul>
+    </div>
 
-  <!-- Piggy Section -->
-  <div class="wallet-container">
-    <span class="see-wallet-text">
+    <!-- Buttons Section -->
+    <div class="button-container">
+      <button class="action-button">Income</button>
+      <button class="action-button">Fixed Expenses</button>
+      <button class="action-button">Variable Expenses</button>
+      <button class="action-button">Unplanned Expenses</button>
+      <button class="action-button">Piggy Savings</button>
+    </div>
+
+    <!-- Wallet Section -->
+    <div class="wallet-container">
+      <span class="see-wallet-text">
         See <span class="gradient-text">Wallet</span>.
       </span>
-    <div class="wallet-rectangle">
-      <img src="assets/expand.png" alt="Expand Icon" class="expand-icon">
-      <p class="wallet-amount">$76,530.25</p>
+      <div class="wallet-rectangle">
+        <img src="/assets/expand.png" alt="Expand Icon" class="expand-icon">
+        <p class="wallet-amount" id="wallet-amount">Loading...</p>
+
+      </div>
+      <h1>Your wallet is looking <span class="gradient-text-nu">....</span></h1>
     </div>
-    <h1>Your wallet is looking <span class="gradient-text-nu">  hefty!</span></h1>
+    
+    <!-- Wallet Modal -->
+<div id="wallet-modal" class="modal hidden">
+  <div class="modal-content">
+    <!-- Close Button -->
+    <span class="close-btn">&times;</span>
+    <h2>Wallet Details</h2>
+    <div class="wallet-data">
+      <div class="wallet-item">
+        <label>Income: $</label>
+        <input type="number" id="wallet-income" value="$0.00" class="stylish-input">
+      </div>
+      <div class="wallet-item">
+        <label>Fixed Expenses: $</label>
+        <input type="number" id="wallet-fixed-expenses" value="$0.00" class="stylish-input">
+      </div>
+      <div class="wallet-item">
+        <label>Variable Expenses: $</label>
+        <input type="number" id="wallet-variable-expenses" value="$0.00" class="stylish-input">
+      </div>
+      <div class="wallet-item">
+        <label>Unplanned Expenses: $</label>
+        <input type="number" id="wallet-unplanned-expenses" value="$0.00" class="stylish-input">
+      </div>
+      <div class="wallet-item">
+        <label>Savings: $</label>
+        <input type="number" id="wallet-savings" value="$0.00" class="stylish-input">
+      </div>
+    </div>
+    <button id="save-wallet" class="save-btn">Save</button>
   </div>
-  
+</div>
 
 
-
-<!-- Glow Areas -->
+  <!-- Glow Areas -->
   <div class="glow glow-area-1"></div>
   <div class="glow pulsing-glow glow-area-2"></div>
   <div class="glow glow-area-3"></div>
   <div class="glow pulsing-glow glow-area-4"></div>
-
-
 </body>
 </html>
