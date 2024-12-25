@@ -10,6 +10,16 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 // Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAGA-H_wK1RIijn6WqIHt0322MUt9hzHa4",
+    authDomain: "finnovators-bb552.firebaseapp.com",
+    projectId: "finnovators-bb552",
+    storageBucket: "finnovators-bb552.firebasestorage.app",
+    messagingSenderId: "74279975494",
+    appId: "1:74279975494:web:c92ff6fb01f1d58e35e847",
+    measurementId: "G-EMQNRR0CS7"
+};
+
 
 // Initialize Firebase app
 const app = initializeApp(firebaseConfig);

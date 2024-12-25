@@ -1,7 +1,7 @@
 // Import Firebase Authentication and Firestore functions
-import { auth, provider } from './firebaseconf'; // Firebase auth and provider from firebaseconf.js
+import { auth, provider } from './firebaseconf';
 import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-import { signInWithPopup } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js"; // Add signInWithPopup import
+import { signInWithPopup } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 // Sentences for dynamic typing
 const sentences = [
@@ -11,79 +11,84 @@ const sentences = [
     "Finny is here to make budgeting fun!"
 ];
 
-const dynamicText = document.getElementById("dynamic-text");
-const circle = document.querySelector(".green-circle");
+// Wait for DOM content to load
+document.addEventListener("DOMContentLoaded", () => {
+    const dynamicText = document.getElementById("dynamic-text");
+    const circle = document.querySelector(".green-circle");
 
-let i = 0;
-let j = 0;
-let currentSentence = "";
-let isDeleting = false;
-
-// Typewriter Effect
-function typeEffect() {
-    currentSentence = sentences[i];
-
-    if (isDeleting) {
-        dynamicText.textContent = currentSentence.substring(0, j--);
-    } else {
-        dynamicText.textContent = currentSentence.substring(0, j++);
+    if (!dynamicText || !circle) {
+        console.error("Dynamic text or circle element not found in the DOM.");
+        return;
     }
 
-    // Move the circle right before the current letter
-    const textWidth = dynamicText.offsetWidth;
-    circle.style.left = `${textWidth - 10}px`;
+    let i = 0;
+    let j = 0;
+    let isDeleting = false;
 
-    if (!isDeleting && j === currentSentence.length) {
-        isDeleting = true;
-        setTimeout(typeEffect, 1000);
-    } else if (isDeleting && j === 0) {
-        isDeleting = false;
-        i = (i + 1) % sentences.length;
-        setTimeout(typeEffect, 500);
-    } else {
-        const speed = isDeleting ? 50 : 100;
-        setTimeout(typeEffect, speed);
+    // Typewriter Effect
+    function typeEffect() {
+        const currentSentence = sentences[i];
+
+        if (isDeleting) {
+            dynamicText.textContent = currentSentence.substring(0, j--);
+        } else {
+            dynamicText.textContent = currentSentence.substring(0, j++);
+        }
+
+        // Update the circle position
+        const dynamicTextRect = dynamicText.getBoundingClientRect();
+        circle.style.left = `${dynamicTextRect.width + 10}px`; // Adjust offset for better positioning
+
+        if (!isDeleting && j === currentSentence.length) {
+            isDeleting = true;
+            setTimeout(typeEffect, 1000); // Pause before deleting
+        } else if (isDeleting && j === 0) {
+            isDeleting = false;
+            i = (i + 1) % sentences.length;
+            setTimeout(typeEffect, 500); // Pause before typing new sentence
+        } else {
+            const speed = isDeleting ? 50 : 100; // Typing speed
+            setTimeout(typeEffect, speed);
+        }
     }
-}
 
-typeEffect();
+    typeEffect();
 
-// Google Sign-In Handling
-const loginButton = document.getElementById("login-btn");
-const signupButton = document.getElementById("signup-btn");
+    // Google Sign-In Handling
+    const loginButton = document.getElementById("login-btn");
 
-function handleGoogleSignIn() {
-    signInWithPopup(auth, provider)
-        .then((result) => {
-            const user = result.user;
-            console.log("User signed in:", user);
+    loginButton?.addEventListener("click", () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                console.log("User signed in:", user);
 
-            // Optionally, store user data in Firestore
-            saveUserData(user);
+                // Save user data to Firestore
+                saveUserData(user);
 
-            // Redirect to main page after successful login/signup
-            window.location.href = "mainpage.html";
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error("Error:", errorCode, errorMessage);
-            alert("An error occurred: " + errorMessage);
-        });
-}
-
-// Event listeners for login and create account buttons
-loginButton.addEventListener("click", handleGoogleSignIn);
-signupButton.addEventListener("click", handleGoogleSignIn);
-
-// Save user data to Firestore
-async function saveUserData(user) {
-    const db = getFirestore();
-    const userRef = doc(db, "users", user.uid); // Reference to the user document
-    await setDoc(userRef, {
-        name: user.displayName,
-        email: user.email,
-        profilePicture: user.photoURL,
-        lastLogin: new Date()
+                // Redirect to main page after successful login
+                window.location.href = "mainpage.html";
+            })
+            .catch((error) => {
+                console.error("Error during Google Sign-In:", error);
+                alert("An error occurred. Please try again.");
+            });
     });
-}
+
+    // Save user data to Firestore
+    async function saveUserData(user) {
+        try {
+            const db = getFirestore();
+            const userRef = doc(db, "users", user.uid); // Reference to user document
+            await setDoc(userRef, {
+                name: user.displayName,
+                email: user.email,
+                profilePicture: user.photoURL,
+                lastLogin: new Date(),
+            });
+            console.log("User data saved successfully.");
+        } catch (error) {
+            console.error("Error saving user data to Firestore:", error);
+        }
+    }
+});

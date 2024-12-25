@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return parseFloat(piggyBalanceElement.textContent.replace(/[^0-9.-]+/g, "")) || 0;
     };
 
+    
+
     const updateBalance = (newBalance) => {
       const piggyBalanceElement = document.getElementById("piggy-balance");
       piggyBalanceElement.textContent = newBalance.toLocaleString("en-US", {
@@ -32,18 +34,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Update piggy descriptive text
     updatePiggyDescriptiveText(newBalance);
+    updateTipOfTheDay(newBalance);
     };
 
     const updatePiggyDescriptiveText = (balance) => {
-      const piggyDescriptiveText = document.querySelector(".gradient-text-nu");
-      if (balance >= 20000) {
-        piggyDescriptiveText.textContent = "well-fed!";
-      } else if (balance <= 10000) {
-        piggyDescriptiveText.textContent = "hungry!";
-      } else {
-        piggyDescriptiveText.textContent = "average!";
-      }
+      const descriptiveText = document.querySelector(".gradient-text-nu");
+      descriptiveText.textContent =
+        balance >= 20000 ? "well-fed!" : balance <= 10000 ? "hungry!" : "average!";
     };
+
+    const tips = [
+      { min: 0, max: 1000, text: "Start small, but start now! Even a little savings can grow over time." },
+      { min: 1001, max: 5000, text: "Great start! Consider setting up automatic savings to stay consistent." },
+      { min: 5001, max: 10000, text: "You're on a roll! Keep it up by cutting back on non-essentials." },
+      { min: 10001, max: 20000, text: "Impressive savings! Think about diversifying into investments." },
+      { min: 20001, max: Infinity, text: "Your savings are thriving! Have you considered consulting a financial advisor?" },
+    ];
+
+    const getTipForSavings = (balance) => {
+      return tips.find((tip) => balance >= tip.min && balance <= tip.max)?.text || "Keep saving!";
+    };
+
+    const updateTipOfTheDay = (balance) => {
+      const tipsContainer = document.getElementById("tips-container");
+      tipsContainer.textContent = getTipForSavings(balance);
+    };
+
   
 
     const loadSavings = async () => {
@@ -60,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
+    
     const saveSavings = async (newBalance) => {
       try {
         await updateDoc(walletRef, { savings: newBalance });
@@ -68,6 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Error updating savings in Firestore:", error);
       }
     };
+
+    
 
     // Modal Elements
     const piggyModal = document.getElementById("piggy-bank-modal");
@@ -170,4 +189,8 @@ document.addEventListener("DOMContentLoaded", () => {
     sidebarShow.classList.add("hidden");
     sidebarShow.classList.remove("visible");
   });
+
+
+
+  
 });

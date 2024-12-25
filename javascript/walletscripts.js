@@ -13,9 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-
-
-
     const userId = user.uid;
     const walletRef = doc(db, "users", userId, "walletData", "financialData");
 
@@ -58,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("wallet-savings").value = savings;
     }
 
-
     function updateDescriptiveText(walletAmount) {
       const descriptiveTextElement = document.querySelector(".gradient-text-nu");
 
@@ -70,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         descriptiveTextElement.textContent = "average!";
       }
     }
+
     // Open wallet modal
     const walletModal = document.getElementById("wallet-modal");
     document.querySelector(".expand-icon")?.addEventListener("click", () => {
@@ -101,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         // Save to Firebase
         await setDoc(walletRef, walletData);
-        
+
         // Update wallet display
         updateWalletDisplay(walletData);
 
@@ -137,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
           question = "What are my unplanned expenses?";
           break;
         case "Piggy Savings":
-          question = "What do I have in my Piggy Bank?";
+          question = "What is in my savings?";
           break;
       }
 
@@ -146,7 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "mainpage.html";
     });
   });
-});
 
   // Sidebar toggle functionality
   const sidebar = document.querySelector(".sidebar");
@@ -164,5 +160,4 @@ document.addEventListener("DOMContentLoaded", () => {
     sidebarShow.classList.add("hidden");
     sidebarShow.classList.remove("visible");
   });
-
-  
+});
