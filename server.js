@@ -1,48 +1,60 @@
-import dotenv from 'dotenv';  // ES Module import syntax
-dotenv.config();  // Load environment variables from .env file
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
-import axios from 'axios';  // ES Module import for axios
+import fetch from 'node-fetch';
 
 const app = express();
 
-// Enable CORS for specific origin
+// Enable CORS
 app.use(cors({
-  origin: 'http://localhost:5500',  // Allow only from this origin
-  methods: ['GET', 'POST', 'OPTIONS'],  // Allow POST and OPTIONS methods
+  origin: 'http://localhost:5500',
+  methods: ['GET', 'POST', 'OPTIONS'],
 }));
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-app.post('/api/openai', async (req, res) => {
-  console.log('Received request:', req.body);  // Log incoming request body
-  const message = req.body.message;
-  const apiKey = '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';
-  console.log('Loaded API Key:', process.env.OPENAI_API_KEY);
+const HF_API_URL = 'https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill';
+const HF_API_TOKEN = "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"; // Add your token to the .env file
 
-  if (!apiKey) {
-    console.error('API key is missing!');
-    return res.status(400).json({ error: 'API key is missing' });
+app.get('/', (req, res) => {
+  res.send('Welcome to the Mistral AI chatbot server!');
+});
+
+app.post('/api/chat', async (req, res) => {
+  const { message } = req.body;
+
+  if (!HF_API_TOKEN) {
+    return res.status(400).json({ error: 'Hugging Face API key is missing' });
   }
 
   try {
-    const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-      model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: message }],
-      max_tokens: 150,
-    }, {
+    const response = await fetch(HF_API_URL, {
+      method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
+        'Authorization': `Bearer ${HF_API_TOKEN}`,
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        inputs: message,
+      }),
     });
 
-    const botResponse = response.data.choices[0].message.content;
+    if (!response.ok) {
+      const error = await response.json();
+      console.error('Error from Hugging Face API:', error);
+      return res.status(response.status).json({ error });
+    }
+
+    const data = await response.json();
+    const botResponse = data.generated_text || 'Sorry, I couldn’t generate a response.';
     res.json({ response: botResponse });
+
   } catch (error) {
-    console.error('Error fetching from OpenAI:', error);
-    res.status(500).json({ error: 'Failed to fetch data from OpenAI' });
+    console.error('Error communicating with Hugging Face API:', error);
+    res.status(500).json({ error: 'Failed to fetch data from Hugging Face API' });
   }
 });
 
