@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finnovators AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="/styles/stylesheet.css" rel="stylesheet">
+
+    <!-- Firebase SDKs -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"></script>
+
+    <!-- Firebase configuration script -->
+    <script type="module" src="../javascript/firebaseconf.js" defer></script>
+
+    <!-- Main JavaScript -->
+    <script type="module" src="../javascript/finscripts.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <!-- Title with gradient effect -->
+            <h1 class="gradient-title">Finny.</h1>
+
+            <!-- Dynamic text section -->
+            <p class="typewriter">
+                <span id="dynamic-text">Let Finny help you be financially smarter!</span>
+            </p>
+
+            <!-- Decorative green circle -->
+            <div class="green-circle"></div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section" id="auth-container">
+            <!-- Main logo -->
+            <img src="/assets/finny-get-started.png" alt="Finnovators Logo" class="logo-image">
+            
+            <!-- Welcome Message -->
+            <h3>Welcome to Finny</h3>
+
+            <!-- Get Started Buttons -->
+            <div class="button-container">
+                <button id="login-btn" class="get-started-btn login-btn">
+                    <img src="/assets/google.png" alt="Google Icon" class="google-icon"> Login with Google
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <img src="/assets/finnovators-logo.png" alt="Finnovators Logo">
+                <div>
+                    <a href="terms.html">Terms of Use</a> |
+                    <a href="privacy.html">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
